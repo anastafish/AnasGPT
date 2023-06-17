@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @layer utilities {
   @layer responsive {
       /* Hide scrollbar for Chrome, Safari and Opera */
