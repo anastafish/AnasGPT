@@ -21,10 +21,10 @@ export default function Chat() {
       <Head>
         <title>AnasGPT</title>               
       </Head>
-      <AdBanner 
+      {/* <AdBanner 
         data-ad-slot="7434970023"
         data-full-width-responsive="true"
-      />
+      /> */}
       <div className="flex flex-col items-center justify-center w-full">
         <div
           className="flex flex-col items-center justify-start
