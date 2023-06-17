@@ -23,7 +23,6 @@ export default function Chat() {
       </Head>
       <AdBanner 
         data-ad-slot="7434970023"
-        data-ad-format="auto"
         data-full-width-responsive="true"
       />
       <div className="flex flex-col items-center justify-center w-full">
