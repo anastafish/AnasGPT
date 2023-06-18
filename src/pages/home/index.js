@@ -62,8 +62,9 @@ export default function Chat() {
         <form 
           onSubmit={(e) => {
             handleSubmit(e)
-            if (e.key == 'Enter'){
-              e.target.blur();
+            if (e.keyCode == 13){
+              e.currentTarget.blur();
+              e.target.blur()
           }
           }} 
           className=" w-[70%]">
