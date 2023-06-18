@@ -59,7 +59,14 @@ export default function Chat() {
              </h1>}
           <div ref={bottomRef}></div>
         </div>
-        <form onSubmit={handleSubmit} className=" w-[70%]">
+        <form 
+          onSubmit={(e) => {
+            handleSubmit(e)
+            if (e.key == 'Enter'){
+              e.target.blur();
+          }
+          }} 
+          className=" w-[70%]">
             <TextField
             fullWidth
             placeholder='Ask Me Anything'
