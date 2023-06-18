@@ -1,24 +1,27 @@
 'use client'
 import { useState, useEffect } from 'react';
 import { useAuthContext } from "@/context/AuthContext"
-import {Button, TextField} from "@mui/material"
+import {Button, TextField, Dialog} from "@mui/material"
 import signIn from "@/firebase/auth/signin";
 import { useRouter } from 'next/navigation'
 import Link from 'next/link';
 import Image from 'next/image';
 import signinWithGoogle from "@/firebase/auth/googleSignin";
 import Head from 'next/head';
+import Header from '@/components/Header';
 
 function Page() {
     const { user } = useAuthContext()
     const router = useRouter()
 
     useEffect(() => {
-        if (user != null) router.push("/home")
+        if (user != null) router.push("/chat")
     }, [user])
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+
+    const [dialog, setDialog] = useState(false)
     
 
     const handleGoogleSignin = async () => {
@@ -28,7 +31,7 @@ function Page() {
             return console.log(error)
         }
         console.log(result)
-        return router.push('/home')
+        return router.push('/chat')
     }
 
     const handleForm = async (event) => {
@@ -37,18 +40,25 @@ function Page() {
         const { result, error } = await signIn(email, password);
 
         if (error) {
-            return console.log(error)
+            setDialog(true)
+            return;
         }
 
         // else successful
-        console.log(result)
-        return router.push("/home")
+        return router.push("/chat")
     }
     return (
-    <div className='w-[100vw] h-[100vh] flex sm:flex-row flex-col'>
+    <div className='w-[100vw] h-[100vh] justify-center flex sm:flex-row flex-col'>
+        <Header />
+        <Dialog open={dialog}>
+            <div className='p-5 flex flex-col justify-center items-center'>
+                <h1>Email or Password are incorrect</h1>
+                <Button onClick={() => setDialog(false)}>Close</Button>
+            </div>
+        </Dialog>
         <Head>
             <title>
-                Signin
+                Login
             </title>
             </Head>
         <div className='sm:h-full h-[50%] w-full flex flex-col items-center justify-center'>
@@ -59,10 +69,10 @@ function Page() {
                 Login to your account
                 </h1>
         </div>
-        <div className="h-full w-full flex flex-col items-center justify-center">
+        <div className="h-full w-full flex flex-col items-center justify-center gap-4">
                 <form
                     onSubmit={handleForm}
-                    className="flex flex-col items-center justify-center gap-5">
+                    className="flex flex-col items-center justify-center">
                     <label htmlFor="email">
                         <p>Email</p>
                         <TextField
@@ -83,7 +93,12 @@ function Page() {
                             id="password"
                             placeholder="password"
                              />
-                    </label>
+                    </label>                    
+                    <Button
+                        type="submit"
+                        style={{padding:15}}>
+                            Login
+                    </Button>
                     <div className='flex items-center justify-center gap-5 w-full'>
                         <Image
                             alt='google-logo'
@@ -94,11 +109,6 @@ function Page() {
                             onClick={handleGoogleSignin}
                             />
                     </div>
-                    <Button
-                        type="submit"
-                        style={{padding:15}}>
-                            Sign In
-                    </Button>
                 </form>
                 <h1>Don't have an account?
                     <Link

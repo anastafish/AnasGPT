@@ -2,9 +2,11 @@ import { useRef, useEffect } from "react"
 import { useChat } from 'ai/react'
 import { useAuthContext } from "@/context/AuthContext"
 import { TextField, Button } from "@mui/material"
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import signOutUser from "@/firebase/auth/signOutUser";
 import { useRouter } from "next/navigation"
 import Head from "next/head"
+import Link from "next/link";
 
 
 export default function Chat() {
@@ -12,7 +14,7 @@ export default function Chat() {
     const router = useRouter()
 
     useEffect(() => {
-        if (user == null) router.push("/signin")
+        if (user == null) router.push("/login")
     }, [user])
 
   const { messages, input, handleInputChange, handleSubmit } = useChat()
@@ -22,26 +24,26 @@ export default function Chat() {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const signOutUser = () => {
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      // Sign-out successful.
-      router.push("/signin")
-    }).catch((error) => {
-      // An error happened.
-      console.log(error)
-    });
-  }
-
   return (
     <div className="flex flex-col items-center justify-center w-[100vw]">      
       <Head>
         <title>AnasGPT</title>               
       </Head>
-      <div className="w-full bg-green-300 h-[50px] sticky flex items-center justify-start p-2">
-              <Button onClick={signOutUser} style={{backgroundColor:'red', color:'black'}}>
-                SignOut
-              </Button>
+      <div className="w-full bg-green-300 h-[50px] sticky flex items-center justify-between p-2">
+              <h1 className='sm:text-[20px] text-[18px]'>Welcome {user && <strong>{user.displayName}</strong>}</h1>
+              <div className="flex items-center justify-center gap-5">
+                <Link href={'/'} className='sm:text-[20px] text-[18px] font-bold'>
+                  Home
+                </Link>
+
+                <Button
+                 onClick={() => signOutUser(router)} 
+                 style={{backgroundColor:'red', color:'black', fontWeight:700}}
+                 >
+                  SignOut
+                </Button>               
+                
+              </div>
       </div>
       <div className="flex flex-col items-center justify-center w-full">
         <div
@@ -71,5 +73,4 @@ export default function Chat() {
         </form>
       </div>
     </div>
-  )
-}
+  )}
