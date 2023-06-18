@@ -60,13 +60,7 @@ export default function Chat() {
           <div ref={bottomRef}></div>
         </div>
         <form 
-          onSubmit={(e) => {
-            handleSubmit(e)
-            if (e.keyCode == 13){
-              e.currentTarget.blur();
-              e.target.blur()
-          }
-          }} 
+          onSubmit={handleSubmit} 
           className=" w-[70%]">
             <TextField
             fullWidth
