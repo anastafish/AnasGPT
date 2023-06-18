@@ -11,8 +11,8 @@ function Header() {
   
 
   return (
-    <header className='w-full flex absolute top-0 items-center justify-between gap-5 bg-green-300 p-5'>
-            <Link href={`'/'`} className='text-[20px] font-bold'>
+    <header className='w-full flex top-0 items-center justify-between gap-5 bg-green-300 p-5'>
+            <Link href={'/'} className='text-[20px] font-bold'>
               Home
             </Link>
             <div className='flex items-center gap-5'>
