@@ -5,7 +5,7 @@ import signOutUser from '@/firebase/auth/signOutUser'
 import { Button } from '@mui/material'
 import { useRouter } from 'next/navigation'
 
-function Header({ children }) {
+function Header() {
   const { user } = useAuthContext()
   const router = useRouter()
 

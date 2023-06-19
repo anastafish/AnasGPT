@@ -76,6 +76,7 @@ function index() {
                 {featuerContent.map((feature, index) => {
                   return (
                     <motion.div 
+                    key={index}
                     className={featureStyles.div}
                     animate={firstIsInView ? {opacity:1, x:[700, 0]} : {opacity:0}}
                     transition={{delay: 0.5 * index, duration:1}}
