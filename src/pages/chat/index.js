@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import { useChat } from 'ai/react'
 import { useAuthContext } from "@/context/AuthContext"
 import { TextField, Button } from "@mui/material"
@@ -12,15 +12,20 @@ import Header from "@/components/Header";
 
 export default function Chat() {
     const { user } = useAuthContext()
-    const router = useRouter()
+    const router = useRouter()    
 
     useEffect(() => {
         if (user == null) router.push("/login")
     }, [user])
 
-  const { messages, input, handleInputChange, handleSubmit } = useChat()
+  const [finished, setFinished] = useState(true)
+  const { messages, input, handleInputChange, handleSubmit} = useChat({
+    onFinish:() => setFinished(true),
+    onError:() => (err => console.log(err))
+  })
+
   const bottomRef = useRef(null);
-  
+
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
@@ -48,11 +53,17 @@ export default function Chat() {
           <div ref={bottomRef}></div>
         </div>
         <form 
-          onSubmit={handleSubmit} 
+          onSubmit={(e) => {
+            handleSubmit(e)
+            setFinished(false)  
+          }}
           className=" w-[70%]">
             <TextField
+            focused={true}
+            autoFocus={true}
+            disabled={finished ? false : true}
             fullWidth
-            placeholder='Ask Me Anything'
+            placeholder={`${finished ? 'Ask Me Anything' : 'Wait...'}`}
               value={input}
               onChange={handleInputChange}
             />
