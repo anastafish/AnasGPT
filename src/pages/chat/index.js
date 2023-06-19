@@ -31,10 +31,10 @@ export default function Chat() {
         <title>AnasGPT</title>               
       </Head>
       <Header />
-      <div className="flex flex-col items-center justify-center w-full">
+      <div className="flex flex-col items-center justify-center w-full gap-5">
         <div
           className="flex flex-col items-center justify-start
-           w-full h-[80vh] overflow-scroll no-scrollbar gap-3 py-5">
+           w-full h-[70vh] overflow-scroll no-scrollbar gap-3 py-5">
             {messages.map(m => (
             <div key={m.id} className={`text-center text-[20px] p-3 w-full font-extrabold
              ${m.role === 'assistant' ? 'bg-slate-500' : ''}`}
