@@ -47,7 +47,7 @@ function Page() {
         return router.push("/chat")
     }
     return (
-        <div className='w-[100vw] h-[100vh] flex flex-col gap-10'>
+        <div className='w-[100vw] h-[100vh] flex flex-col gap-10 bg-slate-200'>
             <Header />
             <Dialog open={dialog}>
             <div className='p-5 flex flex-col justify-center items-center'>

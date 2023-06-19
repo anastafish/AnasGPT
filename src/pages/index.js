@@ -6,6 +6,7 @@ import Header from '@/components/Header'
 import { useAuthContext } from '@/context/AuthContext'
 import { useRef } from 'react'
 import {motion, useInView} from 'framer-motion'
+import Link from 'next/link'
 
 function index() {
 
@@ -27,11 +28,11 @@ function index() {
 
 
   return (
-    <div className='flex flex-col items-center justify-center overflow-hidden bg-slate-200'>
+    <div className='flex flex-col items-center justify-center overflow-hidden bg-slate-200'>      
       <Head>
         <title>AnasGPT - Your Intelligent Conversational Companion</title>
       </Head>
-        <div className='h-[100vh] flex flex-col items-center justify-between gap-5'>
+        <div className='h-[100vh] flex flex-col items-center justify-between gap-5'>          
           <Header />
           <motion.div 
             className='flex flex-col items-center justify-center h-full gap-5'
@@ -60,18 +61,22 @@ function index() {
           <motion.div 
             className='flex flex-col items-center justify-center gap-20 h-full'
             ref={ref}
-            initial={{opacity:1}}
-            // animate={isInView ? {opacity:1, x:[300, 0]} : {opacity:0}}
-            // transition={{delay:0.2, duration:1}}
             >
-              <h1 className='sm:text-[50px] text-[35px] text-center'>Why <strong>AnasGPT</strong>?</h1>
+              <motion.h1 
+                className='sm:text-[50px] text-[35px] text-center'
+                initial={{opacity:0}}
+                animate={isInView ? {opacity:1} : {opacity:0}}
+                transition={{delay:0.5, duration:1}}
+                >
+                Why <strong>AnasGPT</strong>?
+                </motion.h1>
               <div className='w-full flex sm:flex-row flex-col items-center justify-center gap-3'>
                 {featuerContent.map((feature, index) => {
                   return (
                     <motion.div 
                     className={featureStyles.div}
-                    animate={isInView ? {opacity:1, x:[300, 0]} : {opacity:0}}
-                    transition={{delay:0.5 * index, duration:1}}
+                    animate={isInView ? {opacity:1, x:[700, 0]} : {opacity:0}}
+                    transition={{delay: 0.5 * index, duration:1}}
                   >
                   <h1 className={featureStyles.h1}>{feature.title}</h1>
                   <p className='text-center text-[20px]'>{feature.main}</p>

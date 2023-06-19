@@ -7,6 +7,7 @@ import signOutUser from "@/firebase/auth/signOutUser";
 import { useRouter } from "next/navigation"
 import Head from "next/head"
 import Link from "next/link";
+import Header from "@/components/Header";
 
 
 export default function Chat() {
@@ -25,26 +26,11 @@ export default function Chat() {
   }, [messages]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-[100vw]">      
+    <div className="flex flex-col items-center justify-center bg-slate-200">      
       <Head>
         <title>AnasGPT</title>               
       </Head>
-      <div className="w-full bg-green-300 h-[50px] sticky flex items-center justify-between p-2">
-              <h1 className='sm:text-[20px] text-[18px]'>Welcome {user && <strong>{user.displayName}</strong>}</h1>
-              <div className="flex items-center justify-center gap-5">
-                <Link href={'/'} className='sm:text-[20px] text-[18px] font-bold'>
-                  Home
-                </Link>
-
-                <Button
-                 onClick={() => signOutUser(router)} 
-                 style={{backgroundColor:'red', color:'black', fontWeight:700}}
-                 >
-                  SignOut
-                </Button>               
-                
-              </div>
-      </div>
+      <Header />
       <div className="flex flex-col items-center justify-center w-full">
         <div
           className="flex flex-col items-center justify-start
