@@ -12,7 +12,7 @@ function Header({ children }) {
   return (
     <header className='w-full flex top-0 items-center justify-between gap-5 p-1'>
      <div className='flex items-center justify-center gap-5'>
-       {user && <h1 className='sm:text-[20px] text-[15px]'>Welcome {user && <strong>{user.displayName.split(' ')[0]}</strong>}</h1>}
+       {user && <h1 className='sm:text-[20px] text-[15px]'>Welcome {user && <strong>{user.displayName && user.displayName.split(' ')[0]}</strong>}</h1>}
               <Link href={'/'} className={`sm:text-[20px] text-[17px] font-bold hover:bg-slate-300 p-3`}>
                 Home
               </Link>
