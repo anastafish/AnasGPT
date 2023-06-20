@@ -21,7 +21,8 @@ export default function Chat() {
   const [finished, setFinished] = useState(true)
   const { messages, input, handleInputChange, handleSubmit} = useChat({
     onFinish:() => setFinished(true),
-    onError:() => (err => console.log(err))
+    onError:() => (err => console.log(err)),
+    initialMessages:[{role:'user', content:`you are an assistent to a user named ${user.displayName.split(' ')[0]}`}]
   })
 
   const bottomRef = useRef(null);
@@ -40,14 +41,14 @@ export default function Chat() {
         <div
           className="flex flex-col items-center justify-start
            w-full h-[70vh] overflow-scroll no-scrollbar gap-3 py-5">
-            {messages.map(m => (
+            {messages.slice(1).map(m => (
             <div key={m.id} className={`text-center text-[20px] p-3 w-full font-extrabold
              ${m.role === 'assistant' ? 'bg-slate-500' : ''}`}
              >
               <h1 >{m.content}</h1>
             </div>
           ))}
-          {messages.length === 0 && <h1 className="sm:text-[30px] md:text-[50px] md:max-w-[500px] sm:max-w-none max-w-[250px] text-[40px] text-center absolute bottom-[50%]">
+          {messages.slice(1).length === 0 && <h1 className="sm:text-[30px] md:text-[50px] md:max-w-[500px] sm:max-w-none max-w-[250px] text-[40px] text-center absolute bottom-[50%]">
              Welcome to <strong>AnasGPT</strong> <br/> Ask me anything!
              </h1>}
           <div ref={bottomRef}></div>
