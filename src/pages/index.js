@@ -7,6 +7,7 @@ import { useAuthContext } from '@/context/AuthContext'
 import { useRef } from 'react'
 import {motion, useInView} from 'framer-motion'
 import Link from 'next/link'
+import { TypeAnimation } from 'react-type-animation';
 
 function index() {
 
@@ -137,7 +138,7 @@ function index() {
           className='h-[100vh] flex flex-col items-center justify-center gap-5 p-5'
           >
           <motion.div 
-            className='flex flex-col items-center justify-center gap-5 h-full'
+            className='flex flex-col items-center gap-5'
             ref={secondRef}
             transition={{delayChildren:1}}
             >
@@ -145,37 +146,19 @@ function index() {
                 className='sm:text-[50px] text-[35px] text-center text-white'
                 initial={{opacity:0}}
                 animate={secondIsInView ? {opacity:1} : {opacity:0}}
-                transition={{delay:0.5, duration:1}}
+                transition={{duration:1}}
                 >
                 How to use <strong>AnasGPT</strong>?
                 </motion.h1>
-                <motion.ul className='flex flex-col items-center justify-center gap-5'>                  
-                  <motion.li 
-                    className='sm:text-[35px] text-[25px] text-center text-white'
-                    initial={{opacity:0}}
-                    animate={secondIsInView ? {opacity:1} : {opacity:0}}
-                    transition={{delay:1, duration:1}}
-                    >
-                    1- Signup for a free account from 
-                    <Link href={'/signup'} className='text-blue-500'> Here</Link>
-                  </motion.li>
-                  <motion.li 
-                    className='sm:text-[35px] text-[25px] text-center text-white'
-                    initial={{opacity:0}}
-                    animate={secondIsInView ? {opacity:1} : {opacity:0}}
-                    transition={{delay:1.6, duration:1}}
-                    >
-                    2- Ask it Anything in your mind
-                  </motion.li>
-                  <motion.li 
-                    className='sm:text-[35px] text-[25px] text-center text-white'
-                    initial={{opacity:0}}
-                    animate={secondIsInView ? {opacity:1} : {opacity:0}}
-                    transition={{delay:2.2, duration:1}}
-                    >
-                    3- Get the answer instantly!
-                  </motion.li>
-                </motion.ul>
+                <motion.ul className='flex flex-col items-center justify-center gap-5'>  
+                  {secondIsInView && <TypeAnimation 
+                  style={{whiteSpace: 'pre-line', fontSize:35, color:'white', textAlign:'center'}}
+                    sequence={[
+                      // Same substring at the start will only be typed out once, initially
+                      '1- Signup for a free account from \n 2- Ask it Anything in your mind \n 3- Get the answer instantly!'
+                    ]}
+                  />  }
+                  </motion.ul>
             </motion.div>
           </div>
     </motion.div>
