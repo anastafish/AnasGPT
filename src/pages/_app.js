@@ -1,15 +1,16 @@
 import '@/styles/globals.css'
-import {Inter} from 'next/font/google'
+import {Poppins} from 'next/font/google'
+
 import {AuthContextProvider} from '../context/AuthContext'
 
-const inter = Inter({ subsets: ['greek'] })
+const poppins = Poppins({ subsets: ['latin'], weight:'800' })
 
 
 export default function App({ Component, pageProps }) {
 
   return (
     <AuthContextProvider > 
-      <main className={inter.className}>
+      <main className={poppins.className}>
         <Component {...pageProps} />
       </main>
     </AuthContextProvider>

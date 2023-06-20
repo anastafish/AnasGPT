@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { Button } from '@mui/material'
 import { useRouter } from 'next/navigation'
@@ -24,13 +24,57 @@ function index() {
   ]
 
   const featureStyles = {
-    h1:'sm:text-[25px] md:text-[30px] text-[20px] text-center font-bold',
+    h1:'sm:text-[25px] md:text-[30px] text-[20px] text-center font-bold text-white',
     div:' flex items-center justify-center p-4 flex-col border-[2px] rounded-md border-black sm:w-[30%] w-full h-full bg-gray-400'
   }
 
+  const [y, setY] = useState(0);
+  const [color, setColor] = useState('#EBEDEF')
+
+  useEffect(() => {
+    if (y < 100) setColor('#EBEDEF')
+        else if (y > 100 && y < 200) setColor('#D6DBDF')
+        else if (y > 200 && y < 300) setColor('#D6DBDF');
+        else if (y > 300 && y < 400) setColor('#85929E');
+        else if (y > 400 && y < 500) setColor('#5D6D7E');
+        else if (y > 500 && y < 600) setColor('#34495E');
+        else if (y > 600 && y < 700) setColor('#2E4053');
+        else if (y > 700 && y < 800) setColor('#283747');
+        else if (y > 800 && y < 900) setColor('#212F3C');
+        else if (y > 900 && y < 1000) setColor('#1B2631');
+        else setColor('#17202A') 
+  }, [y])
+
+  const handleNavigation = (e) => {
+    const window = e.currentTarget;
+    console.log(window.scrollY)
+    if (y > window.scrollY) {
+      console.log("scrolling up");       
+
+    } else if (y < window.scrollY) {
+      console.log("scrolling down");
+    }
+    setY(window.scrollY);
+    console.log(color)
+  };
+
+  useEffect(() => {
+    setY(window.scrollY);
+  }, []);
+  
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => handleNavigation(e));
+  
+  }, [y]);
+
 
   return (
-    <div className='flex flex-col items-center justify-center overflow-hidden bg-slate-200'>      
+    <motion.div 
+      className={`flex flex-col items-center justify-center overflow-hidden`}
+      initial={{backgroundColor:'#E5E7E9'}}
+      animate={{backgroundColor:color}}
+      transition={{duration:.5}}
+      >      
       <Head>
         <title>AnasGPT - Your Intelligent Conversational Companion</title>
       </Head>
@@ -65,7 +109,7 @@ function index() {
             ref={firstRef}
             >
               <motion.h1 
-                className='sm:text-[50px] text-[35px] text-center'
+                className='sm:text-[50px] text-white text-[35px] text-center'
                 initial={{opacity:0}}
                 animate={firstIsInView ? {opacity:1} : {opacity:0}}
                 transition={{delay:0.5, duration:1}}
@@ -82,7 +126,7 @@ function index() {
                     transition={{delay: 0.5 * index, duration:1}}
                   >
                   <h1 className={featureStyles.h1}>{feature.title}</h1>
-                  <p className='text-center text-[20px]'>{feature.main}</p>
+                  <p className='text-center text-[20px] text-white'>{feature.main}</p>
                 </motion.div>  
                   )
                 }) }
@@ -98,7 +142,7 @@ function index() {
             transition={{delayChildren:1}}
             >
               <motion.h1 
-                className='sm:text-[50px] text-[35px] text-center'
+                className='sm:text-[50px] text-[35px] text-center text-white'
                 initial={{opacity:0}}
                 animate={secondIsInView ? {opacity:1} : {opacity:0}}
                 transition={{delay:0.5, duration:1}}
@@ -107,7 +151,7 @@ function index() {
                 </motion.h1>
                 <motion.ul className='flex flex-col items-center justify-center gap-5'>                  
                   <motion.li 
-                    className='sm:text-[35px] text-[25px] text-center'
+                    className='sm:text-[35px] text-[25px] text-center text-white'
                     initial={{opacity:0}}
                     animate={secondIsInView ? {opacity:1} : {opacity:0}}
                     transition={{delay:1, duration:1}}
@@ -116,7 +160,7 @@ function index() {
                     <Link href={'/signup'} className='text-blue-500'> Here</Link>
                   </motion.li>
                   <motion.li 
-                    className='sm:text-[35px] text-[25px] text-center'
+                    className='sm:text-[35px] text-[25px] text-center text-white'
                     initial={{opacity:0}}
                     animate={secondIsInView ? {opacity:1} : {opacity:0}}
                     transition={{delay:1.6, duration:1}}
@@ -124,7 +168,7 @@ function index() {
                     2- Ask it Anything in your mind
                   </motion.li>
                   <motion.li 
-                    className='sm:text-[35px] text-[25px] text-center'
+                    className='sm:text-[35px] text-[25px] text-center text-white'
                     initial={{opacity:0}}
                     animate={secondIsInView ? {opacity:1} : {opacity:0}}
                     transition={{delay:2.2, duration:1}}
@@ -134,7 +178,7 @@ function index() {
                 </motion.ul>
             </motion.div>
           </div>
-    </div>
+    </motion.div>
   )
 }
 
