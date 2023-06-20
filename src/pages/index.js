@@ -169,7 +169,7 @@ function index() {
             </motion.div>
           </div>
           <div className='w-[100vw] flex items-center justify-center p-3'>
-                 <h1 className='text-[20px]'>© 2023 AnasGPT. Embrace the Future.</h1>     
+                 <h1 className='sm:text-[20px] text-[10px] text-center text-white'>© 2023 AnasGPT. Embrace the Future.</h1>     
           </div>
     </motion.div>
   )
