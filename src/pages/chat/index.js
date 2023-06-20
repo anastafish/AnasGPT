@@ -56,7 +56,7 @@ export default function Chat() {
         <form 
           onSubmit={(e) => {
             handleSubmit(e)
-            setFinished(false)  
+            input && setFinished(false)  
           }}
           className=" w-[70%] flex">
             <TextField
@@ -70,7 +70,10 @@ export default function Chat() {
               value={input}
               onChange={handleInputChange}
             />
-          <button className="flex items-center justify-center">
+          <button 
+            className={`flex items-center justify-center ${finished && input ? 'bg-[rgb(65 105 225)]' : 'bg-gray-600'}`}
+            disabled={finished && input ? false : true}
+            >
           <div class="svg-wrapper-1">
             <div class="svg-wrapper">
               <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
