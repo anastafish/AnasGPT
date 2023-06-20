@@ -7,6 +7,9 @@ import { useAuthContext } from '@/context/AuthContext'
 import { useRef } from 'react'
 import {motion, useInView} from 'framer-motion'
 import { TypeAnimation } from 'react-type-animation';
+import {Glass_Antiqua} from 'next/font/google'
+
+const glass_antiqua = Glass_Antiqua({ subsets: ['latin'], weight:'400' })
 
 function index() {
 
@@ -16,6 +19,8 @@ function index() {
   const secondRef = useRef(null)
   const secondIsInView = useInView(secondRef, {once:true})
   const firstIsInView = useInView(firstRef, {once:true})
+
+
 
   const featuerContent = [
     {title:'Natural Language Understanding', main:'AnasGPT comprehends and responds accurately to your queries.'},
@@ -70,7 +75,7 @@ function index() {
 
   return (
     <motion.div 
-      className={`flex flex-col items-center justify-center overflow-hidden`}
+      className={`flex flex-col items-center justify-center overflow-x-hidden`}
       initial={{backgroundColor:'#E5E7E9'}}
       animate={{backgroundColor:color}}
       transition={{duration:.5}}
@@ -87,7 +92,7 @@ function index() {
               transition={{duration:2}} 
             >
             <h1
-              className='sm:text-[50px] text-[30px] max-w-[70%] text-center'                           
+              className={['sm:text-[60px] text-[40px] max-w-[70%] text-center', glass_antiqua.className].join(" ")}                          
               >
                 Welcome To <strong className='font-extrabold'>AnasGPT</strong>
              - Your Intelligent Conversational Companion!
@@ -147,20 +152,24 @@ function index() {
                 animate={secondIsInView ? {opacity:1} : {opacity:0}}
                 transition={{duration:1}}
                 >
-                How to use <strong>AnasGPT</strong>?
+                How to use <strong>AnasGPT</strong>:
                 </motion.h1>
                 <motion.ul 
                 className='flex flex-col items-center justify-center gap-5
-                 bg-gray-500 p-5 rounded-md w-full'>  
+                 p-5 rounded-md w-full'>  
                   {secondIsInView && <TypeAnimation 
-                  style={{whiteSpace: 'pre-line', fontSize:35, color:'white', textAlign:'center'}}
+                  style={{whiteSpace: 'pre-line', fontSize:30, color:'white', textAlign:'center'}}
                     sequence={[
                       // Same substring at the start will only be typed out once, initially
-                      '1- Signup for a free account. \n 2- Ask it Anything in your mind. \n 3- Get the answer instantly!'
+                      '1- Create an Account: Sign up on the AnasGPT website. \n \n 2- Log in: Enter your credentials to access your account. \n \n 3- Start Chatting: Use the chat interface to communicate with AnasGPT.'
                     ]}
+                    speed={60}
                   />  }
                   </motion.ul>
             </motion.div>
+          </div>
+          <div className='w-[100vw] flex items-center justify-center p-3'>
+                 <h1 className='text-[20px]'>© 2023 AnasGPT. Embrace the Future.</h1>     
           </div>
     </motion.div>
   )
