@@ -6,7 +6,6 @@ import Header from '@/components/Header'
 import { useAuthContext } from '@/context/AuthContext'
 import { useRef } from 'react'
 import {motion, useInView} from 'framer-motion'
-import Link from 'next/link'
 import { TypeAnimation } from 'react-type-animation';
 
 function index() {
@@ -34,15 +33,15 @@ function index() {
 
   useEffect(() => {
     if (y < 100) setColor('#EBEDEF')
-        else if (y > 100 && y < 200) setColor('#D6DBDF')
-        else if (y > 200 && y < 300) setColor('#D6DBDF');
-        else if (y > 300 && y < 400) setColor('#85929E');
-        else if (y > 400 && y < 500) setColor('#5D6D7E');
-        else if (y > 500 && y < 600) setColor('#34495E');
-        else if (y > 600 && y < 700) setColor('#2E4053');
-        else if (y > 700 && y < 800) setColor('#283747');
-        else if (y > 800 && y < 900) setColor('#212F3C');
-        else if (y > 900 && y < 1000) setColor('#1B2631');
+        else if (y > 100 && y <= 200) setColor('#D6DBDF')
+        else if (y > 200 && y <= 300) setColor('#D6DBDF');
+        else if (y > 300 && y <= 400) setColor('#85929E');
+        else if (y > 400 && y <= 500) setColor('#5D6D7E');
+        else if (y > 500 && y <= 600) setColor('#34495E');
+        else if (y > 600 && y <= 700) setColor('#2E4053');
+        else if (y > 700 && y <= 800) setColor('#283747');
+        else if (y > 800 && y <= 900) setColor('#212F3C');
+        else if (y > 900 && y <= 1000) setColor('#1B2631');
         else setColor('#17202A') 
   }, [y])
 
@@ -135,10 +134,10 @@ function index() {
           </motion.div>
         </div>
         <div 
-          className='h-[100vh] flex flex-col items-center justify-center gap-5 p-5'
+          className='h-[100vh] w-[100vw] flex flex-col items-center justify-center gap-5'
           >
           <motion.div 
-            className='flex flex-col items-center gap-5'
+            className='flex flex-col items-center gap-5 w-full'
             ref={secondRef}
             transition={{delayChildren:1}}
             >
@@ -150,12 +149,14 @@ function index() {
                 >
                 How to use <strong>AnasGPT</strong>?
                 </motion.h1>
-                <motion.ul className='flex flex-col items-center justify-center gap-5'>  
+                <motion.ul 
+                className='flex flex-col items-center justify-center gap-5
+                 bg-gray-500 p-5 rounded-md w-full'>  
                   {secondIsInView && <TypeAnimation 
                   style={{whiteSpace: 'pre-line', fontSize:35, color:'white', textAlign:'center'}}
                     sequence={[
                       // Same substring at the start will only be typed out once, initially
-                      '1- Signup for a free account from \n 2- Ask it Anything in your mind \n 3- Get the answer instantly!'
+                      '1- Signup for a free account. \n 2- Ask it Anything in your mind. \n 3- Get the answer instantly!'
                     ]}
                   />  }
                   </motion.ul>

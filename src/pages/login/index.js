@@ -11,8 +11,8 @@ import Head from 'next/head';
 import Header from '@/components/Header';
 
 function Page() {
-    const { user } = useAuthContext()
-    const router = useRouter()
+    const { user } = useAuthContext();
+    const router = useRouter();
 
     useEffect(() => {
         if (user != null) router.push("/chat")
